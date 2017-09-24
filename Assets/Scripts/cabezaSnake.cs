@@ -98,7 +98,9 @@ public class cabezaSnake : MonoBehaviour {
     {
         while (jugadorVivo)
         {
+            
             this.transform.position += obtenerDireccion();
+            espejo(this.transform);
             moverCuerpoEntero();
 
             yield return new WaitForSeconds(1 / velocidad);
@@ -118,9 +120,10 @@ public class cabezaSnake : MonoBehaviour {
             instancia.moverse();
 
             if (i > 1)
-                instancia.direccionSiguiente = serpiente[i - 1].GetComponent<cuerpoSnake>().direccionActual;
+                instancia.direccionSiguiente = serpiente[i - 1].GetComponent<cuerpoSnake>().direccionActual;  
             else
                 instancia.direccionSiguiente = obtenerDireccion();
+
         }
     }
 
@@ -136,6 +139,18 @@ public class cabezaSnake : MonoBehaviour {
         instancia.GetComponent<cuerpoSnake>().direccionSiguiente = serpiente[serpiente.Count - 1].GetComponent<cuerpoSnake>().direccionActual;
 
         print(serpiente.Count);
+    }
+
+
+    //Esta función hace el efecto del espejo, en cuanto toca una pared la cabeza aparece del lado opuesto
+    void espejo(Transform ubicacion) {
+        
+        if (Mathf.Abs(ubicacion.position.x)>9)
+            ubicacion.position=new Vector3 (ubicacion.position.x * -1, ubicacion.position.y, ubicacion.position.z)+obtenerDireccion();
+        
+        if (Mathf.Abs(ubicacion.position.y) > 5) 
+            ubicacion.position = new Vector3(ubicacion.position.x, ubicacion.position.y * -1, ubicacion.position.z)+obtenerDireccion();
+
     }
 
 }
