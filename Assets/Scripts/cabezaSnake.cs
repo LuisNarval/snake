@@ -48,7 +48,10 @@ public class cabezaSnake : MonoBehaviour {
             serpiente.Add(instancia);
             instancia.GetComponent<cuerpoSnake>().direccionSiguiente = obtenerDireccion();
         }
-        
+        serpiente[1].GetComponent<cuerpoSnake>().spriteSiguiente = 1;
+        serpiente[2].GetComponent<cuerpoSnake>().spriteSiguiente = 9;
+        spritesCuerpo();
+
     }
     
 
@@ -120,8 +123,12 @@ public class cabezaSnake : MonoBehaviour {
             
             this.transform.position += obtenerDireccion();
             spriteCabeza.sprite = asignarCabeza();
-            espejo(this.transform);
+
+            
             moverCuerpoEntero();
+            spritesCuerpo();
+
+            espejo(this.transform);
 
             yield return new WaitForSeconds(1 / velocidad);
         }
@@ -158,20 +165,132 @@ public class cabezaSnake : MonoBehaviour {
                 instancia.direccionSiguiente = serpiente[i - 1].GetComponent<cuerpoSnake>().direccionActual;  
             else
                 instancia.direccionSiguiente = obtenerDireccion();
-
             
         }
 
     }
 
-    
+
+
+    void spritesCuerpo() {
+
+        for (int i = 1; i < serpiente.Count; i++)
+        {
+            cuerpoSnake instancia = serpiente[i].GetComponent<cuerpoSnake>();
+            instancia.colocarSprite();
+
+            //cuerpo
+            if (i > 1 && i < serpiente.Count - 1) {
+                instancia.spriteSiguiente = serpiente[i - 1].GetComponent<cuerpoSnake>().spriteActual;
+            }
+
+            //cuello
+            else if (i==1) {
+                if (giroReciente)
+                {
+                    instancia.spriteSiguiente = asignarCuello();
+                    instancia.spriteActual = asignarCuello();
+                    instancia.colocarSprite();
+                    
+
+                    giroReciente = false;
+                }
+                else {
+                    instancia.spriteSiguiente = asignarCuello();
+                }
+
+            }
+
+            //cola
+            else if (i==serpiente.Count-1) {
+                instancia.spriteSiguiente = asignarCola();
+                instancia.spriteActual = asignarCola();
+                instancia.colocarSprite();
+            }
+
+            
+
+       }
+
+
+    }
+
+
+    int asignarCuello() {
+
+        string cabeza="";
+        string cola="";
+
+        int valor=0;
+
+        Vector3 vectorCabeza=serpiente[0].transform.position- serpiente[1].transform.position;
+        Vector3 vectorCola= serpiente[2].transform.position - serpiente[1].transform.position;
+
+
+        if (vectorCabeza.x > 0)
+            cabeza = "Derecha";
+        if (vectorCabeza.x < 0)
+            cabeza = "Izquierda";
+        if (vectorCabeza.y > 0)
+            cabeza = "Arriba";
+        if (vectorCabeza.y < 0)
+            cabeza = "Abajo";
+
+
+        if (vectorCola.x > 0)
+            cola = "Derecha";
+        if (vectorCola.x < 0)
+            cola = "Izquierda";
+        if (vectorCola.y > 0)
+            cola = "Arriba";
+        if (vectorCola.y < 0)
+            cola = "Abajo";
 
 
 
+        if ((cabeza == "Arriba" && cola == "Abajo") || (cabeza == "Abajo" && cola == "Arriba"))
+            valor = 0;
+
+        if ((cabeza == "Derecha" && cola == "Izquierda") || (cabeza == "Izquierda" && cola == "Derecha"))
+            valor = 1;
+
+        if ((cabeza == "Derecha" && cola == "Abajo")|| (cabeza == "Abajo" && cola == "Derecha")) 
+            valor = 2;
+
+        if ((cabeza == "Izquierda" && cola == "Abajo") || (cabeza == "Abajo" && cola == "Izquierda"))
+            valor = 3;
+        
+        if ((cabeza == "Derecha" && cola == "Arriba") || (cabeza == "Arriba" && cola == "Derecha"))
+            valor = 4;
+
+        if ((cabeza == "Izquierda" && cola == "Arriba") || (cabeza == "Arriba" && cola == "Izquierda"))
+            valor = 5;
 
 
+        return valor;   
+    }
 
 
+    int asignarCola()
+    {
+        Vector3 vectorCola = serpiente[serpiente.Count-2].transform.position - serpiente[serpiente.Count - 1].transform.position;
+
+        int valor = 0;
+
+        if (vectorCola.x > 0)
+            valor = 9;
+
+        if (vectorCola.x < 0)
+            valor = 7;
+
+        if (vectorCola.y > 0)
+            valor = 8;
+
+        if (vectorCola.y < 0)
+            valor = 6;
+
+        return valor;
+    }
 
 
     //Agrega una nueva seccion a la serpiente y a la lista de GameObjects
