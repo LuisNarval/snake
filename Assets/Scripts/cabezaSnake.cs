@@ -4,21 +4,31 @@ using UnityEngine;
 
 public class cabezaSnake : MonoBehaviour {
 
-    public string direccion;
-    public Vector3 siguientePosicion;
-
     public float velocidad = 4.0f;
 
+    string direccion;
+    
 
-    public List<GameObject> serpiente;
+    List<GameObject> serpiente;
     public GameObject nuevoCuerpo;
 
+    
+    SpriteRenderer spriteCabeza;
 
-    public bool jugadorVivo = true;
+    public Sprite cabezaArriba;
+    public Sprite cabezaAbajo;
+    public Sprite cabezaDerecha;
+    public Sprite cabezaIzquierda;
+    
+
+    bool jugadorVivo = true;
+    bool giroReciente = false;
+    
 
 
-    //En cuanto el juego inicia se crea el cuerpo de la serpiente y enseguida comienza la corrutina para el movimiento
+    //Inicializa variables, instancia el cuerpo base y comienza la corrutina para el movimiento
     void Awake(){
+        spriteCabeza = this.gameObject.GetComponent<SpriteRenderer>();
         crearCuerpo();
         StartCoroutine(movimiento());
     }
@@ -29,8 +39,7 @@ public class cabezaSnake : MonoBehaviour {
     void crearCuerpo() {
 
         direccion = "DERECHA";
-        siguientePosicion = obtenerDireccion();
-
+       
         serpiente = new List<GameObject>();
         serpiente.Add(this.gameObject);
 
@@ -52,17 +61,27 @@ public class cabezaSnake : MonoBehaviour {
 
     //Captura las teclas y modifica la dirección actual de movimiento
     void capturarTeclas(){
-        if (direccion != "ABAJO" && Input.GetKeyDown(KeyCode.W))
-            direccion = "ARRIBA";
-         
-        if (direccion != "DERECHA" && Input.GetKeyDown(KeyCode.A))
-            direccion = "IZQUIERDA";
-          
-        if (direccion != "ARRIBA" && Input.GetKeyDown(KeyCode.S))
-            direccion = "ABAJO";
 
-        if (direccion != "IZQUIERDA" && Input.GetKeyDown(KeyCode.D))
+        if (direccion != "ABAJO" && Input.GetKeyDown(KeyCode.W)) {
+            direccion = "ARRIBA";
+            giroReciente = true;
+        }
+            
+        if (direccion != "DERECHA" && Input.GetKeyDown(KeyCode.A)) {
+            direccion = "IZQUIERDA";
+            giroReciente = true;
+        }
+            
+        if (direccion != "ARRIBA" && Input.GetKeyDown(KeyCode.S)) {
+            direccion = "ABAJO";
+            giroReciente = true;
+        }
+            
+        if (direccion != "IZQUIERDA" && Input.GetKeyDown(KeyCode.D)) {
             direccion = "DERECHA";
+            giroReciente = true;
+        }
+            
 
         if (Input.GetKeyDown(KeyCode.F))
             agregarSeccion();
@@ -74,16 +93,16 @@ public class cabezaSnake : MonoBehaviour {
         switch (direccion){
 
             case "ARRIBA":
-                return siguientePosicion = Vector3.up;
+                return Vector3.up;
               
             case "IZQUIERDA":
-                return siguientePosicion = Vector3.left;
+                return Vector3.left;
                 
             case "DERECHA":
-                return siguientePosicion = Vector3.right;
+                return Vector3.right;
              
             case "ABAJO":
-                return siguientePosicion = Vector3.down;
+                return Vector3.down;
               
             default:
                 return new Vector3(0,0,0);
@@ -100,6 +119,7 @@ public class cabezaSnake : MonoBehaviour {
         {
             
             this.transform.position += obtenerDireccion();
+            spriteCabeza.sprite = asignarCabeza();
             espejo(this.transform);
             moverCuerpoEntero();
 
@@ -107,10 +127,25 @@ public class cabezaSnake : MonoBehaviour {
         }
     }
 
+    //Asigna el sprite correcto para la posición de la cabeza
+    Sprite asignarCabeza() {
+        switch (direccion)
+        {
+            case "ARRIBA":
+                return cabezaArriba;
+            case "IZQUIERDA":
+                return cabezaIzquierda;
+            case "DERECHA":
+                return cabezaDerecha;
+            case "ABAJO":
+                return cabezaAbajo;
+            default:
+                return cabezaDerecha;
+        }
+    }
 
 
-
-
+    
     //Hace que cada seccion de la serpiente se mueva a la dirección correcta de manera independiente.
     void moverCuerpoEntero()
     {
@@ -118,14 +153,23 @@ public class cabezaSnake : MonoBehaviour {
         {
             cuerpoSnake instancia = serpiente[i].GetComponent<cuerpoSnake>();
             instancia.moverse();
-
+            
             if (i > 1)
                 instancia.direccionSiguiente = serpiente[i - 1].GetComponent<cuerpoSnake>().direccionActual;  
             else
                 instancia.direccionSiguiente = obtenerDireccion();
 
+            
         }
+
     }
+
+    
+
+
+
+
+
 
 
 
@@ -141,7 +185,7 @@ public class cabezaSnake : MonoBehaviour {
         print(serpiente.Count);
     }
 
-
+    
     //Esta función hace el efecto del espejo, en cuanto toca una pared la cabeza aparece del lado opuesto
     void espejo(Transform ubicacion) {
         
