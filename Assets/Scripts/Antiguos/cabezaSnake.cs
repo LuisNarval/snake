@@ -188,10 +188,15 @@ public class cabezaSnake : MonoBehaviour {
             else if (i==1) {
                 if (giroReciente)
                 {
-                    instancia.spriteSiguiente = asignarCuello();
-                    instancia.spriteActual = asignarCuello();
-                    instancia.colocarSprite();
                     
+                    instancia.spriteSiguiente = asignarCuello();
+                    instancia.colocarSprite();
+
+                    if (direccion == "ARRIBA" || direccion == "ABAJO")
+                        instancia.spriteSiguiente = 0;
+                    
+                    if (direccion == "DERECHA" || direccion == "IZQUIERDA")
+                        instancia.spriteSiguiente = 1;
 
                     giroReciente = false;
                 }
@@ -296,10 +301,22 @@ public class cabezaSnake : MonoBehaviour {
     //Agrega una nueva seccion a la serpiente y a la lista de GameObjects
     public void agregarSeccion()
     {
-        GameObject instancia = Instantiate(nuevoCuerpo, serpiente[serpiente.Count - 1].GetComponent<Transform>().position, serpiente[serpiente.Count - 1].GetComponent<Transform>().rotation) as GameObject;
+        Vector3 nuevaPosicion = serpiente[serpiente.Count - 2].transform.position - serpiente[serpiente.Count - 1].transform.position;
+        nuevaPosicion *= 0;
+
+        GameObject instancia = Instantiate(nuevoCuerpo, serpiente[serpiente.Count - 1].GetComponent<Transform>().position+nuevaPosicion, serpiente[serpiente.Count - 1].GetComponent<Transform>().rotation) as GameObject;
         serpiente.Add(instancia);
 
         instancia.GetComponent<cuerpoSnake>().direccionSiguiente = serpiente[serpiente.Count - 1].GetComponent<cuerpoSnake>().direccionActual;
+
+        if (direccion == "ARRIBA" || direccion == "ABAJO") 
+            serpiente[serpiente.Count - 2].GetComponent<SpriteRenderer>().sprite = serpiente[serpiente.Count - 2].GetComponent<cuerpoSnake>().cuerpoVertical;
+        
+        if (direccion == "DERECHA" || direccion == "IZQUIERDA")
+            serpiente[serpiente.Count - 1].GetComponent<SpriteRenderer>().sprite = serpiente[serpiente.Count - 2].GetComponent<cuerpoSnake>().cuerpoHorizontal;
+
+        
+        serpiente[serpiente.Count - 1].GetComponent<cuerpoSnake>().spriteSiguiente = asignarCola();
 
         print(serpiente.Count);
     }
