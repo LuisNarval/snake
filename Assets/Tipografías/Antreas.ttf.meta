@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: cb65c2244cc996a4a8c4417e20014efc
+timeCreated: 1506629896
+licenseType: Pro
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Antreas
+  fontNames:
+  - Antreas
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

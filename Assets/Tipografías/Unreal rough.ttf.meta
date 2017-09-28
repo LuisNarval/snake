@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: ef34dc1ecb5778d4eb47ec99ab142017
+timeCreated: 1506633173
+licenseType: Pro
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Unreal
+  fontNames:
+  - Unreal
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 5081e1a9058427c42975c9377e6bbfee, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
