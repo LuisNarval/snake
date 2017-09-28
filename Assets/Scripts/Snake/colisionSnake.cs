@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class colisionSnake : MonoBehaviour {
 
-
+    movimientoSnake codigoMovimiento;
     tamanioSnake codigoTamanio;
     manzana codigoManzana;
     HUD codigoHUD;
 
+    public GameObject estrellas;
+
     // Use this for initialization
     void Start () {
+        codigoMovimiento = this.gameObject.GetComponent<movimientoSnake>();
         codigoTamanio = this.gameObject.GetComponent<tamanioSnake>();
         codigoManzana = GameObject.Find("Manzana").GetComponent<manzana>();
         codigoHUD = GameObject.Find("HUD").GetComponent<HUD>();
@@ -28,8 +31,24 @@ public class colisionSnake : MonoBehaviour {
 
         if (invasor.gameObject.tag == "Seccion")
         {
-            print("Has Muerto");
+            estrellas.SetActive(true);
+            codigoMovimiento.jugadorVivo = false;
+            StartCoroutine(irAGameOver());
+
         }
+
     }
 
+
+    IEnumerator irAGameOver() {
+        yield return new WaitForSeconds(1);
+        print("Un segundo");
+
+        yield return new WaitForSeconds(1);
+        print("Dos segundos");
+
+        yield return new WaitForSeconds(1);
+        print("Tres segundos");
+        print("Sacar pantalla");
+    }
 }

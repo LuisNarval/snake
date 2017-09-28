@@ -47,7 +47,6 @@ public class tamanioSnake : MonoBehaviour {
 
         instancia.GetComponent<seccionSnake>().direccionSiguiente = serpiente[serpiente.Count - 1].GetComponent<seccionSnake>().direccionActual;
 
-        print(serpiente.Count);
     }
 
 

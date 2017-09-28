@@ -9,16 +9,19 @@ public class movimientoSnake : MonoBehaviour {
     
     tamanioSnake codigoTamanio;
 
-    bool jugadorVivo = true;
+    public bool jugadorVivo = false;
 
 
 
-    //Inicializa variables y comienza la corrutina para el movimiento
+    //Inicializa variables
     void Awake()
     {
         direccion = "DERECHA";
         codigoTamanio = this.gameObject.GetComponent<tamanioSnake>();
-       
+    }
+
+    //Comienza la corrutina para el movimiento. Esta función es llamada unicamente por ADMIN_JUEGO.cs
+    public void comenzarMovimiento() {
         StartCoroutine(movimiento());
     }
 
@@ -26,7 +29,8 @@ public class movimientoSnake : MonoBehaviour {
     //Manda a llamar a la funcion capturarTeclas una vez por frame
     void Update()
     {
-        capturarTeclas();
+        if(jugadorVivo)
+           capturarTeclas();
     }
 
 

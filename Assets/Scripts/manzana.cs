@@ -4,18 +4,6 @@ using UnityEngine;
 
 public class manzana : MonoBehaviour {
     
-
-    // Use this for initialization
-    void Start () {
-        cambiarPosicion();
-    }
-    
-    // Update is called once per frame
-    void Update () {
-        
-    }
-
-
     public void cambiarPosicion() {
 
         float X = Random.Range(-18.0f,18.0f);
@@ -28,15 +16,12 @@ public class manzana : MonoBehaviour {
         this.transform.position = new Vector3(posicionX*0.5f, posicionY*0.5f, 2);
 
     }
-
-
+    
     public void OnCollisionEnter(Collision invasor)
     {
         if (invasor.gameObject.tag == "Seccion") {
             cambiarPosicion();
         }
-
     }
-
-
+    
 }
