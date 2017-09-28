@@ -41,14 +41,8 @@ public class colisionSnake : MonoBehaviour {
 
 
     IEnumerator irAGameOver() {
-        yield return new WaitForSeconds(1);
-        print("Un segundo");
-
-        yield return new WaitForSeconds(1);
-        print("Dos segundos");
-
-        yield return new WaitForSeconds(1);
-        print("Tres segundos");
-        print("Sacar pantalla");
+        yield return new WaitForSeconds(3);
+        GameObject.Find("ADMIN_JUEGO").GetComponent<ADMIN_JUEGO>().jugadorMuerto();
     }
+
 }

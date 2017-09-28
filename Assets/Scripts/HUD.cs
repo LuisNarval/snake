@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class HUD : MonoBehaviour {
     
-    int puntos;
+    public int puntos;
     public Text texto_puntos;
     
 
@@ -20,7 +20,7 @@ public class HUD : MonoBehaviour {
 	void Update () {}
 
 
-    void actualizarPuntos() {
+    public void actualizarPuntos() {
         if (puntos < 10)
             texto_puntos.text = "000" + puntos.ToString();
         
