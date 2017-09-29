@@ -11,6 +11,7 @@ public class ADMIN_JUEGO : MonoBehaviour {
     GameObject instanciaSnake;
 
     public HUD hud;
+    public auditorDePuntuacion auditor;
 
     public GameObject paredes;
 
@@ -27,7 +28,8 @@ public class ADMIN_JUEGO : MonoBehaviour {
     public Text puntosResultado;
     public Text puntosNuevoRecord;
 
-
+    
+    [HideInInspector]
     public string dificultad
     {
         get
@@ -110,17 +112,19 @@ public class ADMIN_JUEGO : MonoBehaviour {
 
 
     public void jugadorMuerto() {
+        
         puntosResultado.text = hud.puntos.ToString();
         puntosNuevoRecord.text = hud.puntos.ToString();
 
-        finDelJuego.SetActive(true);
-        finDelJuego.GetComponent<Animator>().SetBool("irARecord",true);
+        auditor.buscarNuevoRecord();
+        
     }
 
 
-    public void guardarRecord() {
-        finDelJuego.GetComponent<Animator>().SetTrigger("salirRecord");
-    }
+    
+
+
+
     
     public void irAMenuDificultad() {
         finDelJuego.GetComponent<Animator>().SetTrigger("irADificultad");

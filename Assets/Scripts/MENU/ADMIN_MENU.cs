@@ -8,6 +8,8 @@ public class ADMIN_MENU : MonoBehaviour {
     public Animator animadorMenu;
     public Text textoDificultad;
    
+    public tablaPuntuaciones tabla;
+
     public string dificultad {
         get {
             return GAMEMANAGER.DIFICULTAD;
@@ -37,6 +39,7 @@ public class ADMIN_MENU : MonoBehaviour {
 
     public void irAPuntuaciones()
     {
+        tabla.colocarTabla();
         animadorMenu.SetTrigger("irAPuntuaciones");
     }
 
