@@ -29,6 +29,10 @@ public class ADMIN_MENU : MonoBehaviour {
 
     public void irAJuego()
     {
+        animadorMenu.Play("irAJuego");
+    }
+
+    public void seleccionarColor() {
         FADER.instancia.siguienteEscena("Juego");
     }
     

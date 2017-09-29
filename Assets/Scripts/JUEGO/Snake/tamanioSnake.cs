@@ -17,6 +17,7 @@ public class tamanioSnake : MonoBehaviour {
     void Start()
     {
         codigoMovimiento = this.GetComponent<movimientoSnake>();
+        this.gameObject.GetComponent<SpriteRenderer>().color = GAMEMANAGER.COLORSERPIENTE;
         crearCuerpo();
     }
 
@@ -33,6 +34,8 @@ public class tamanioSnake : MonoBehaviour {
             GameObject instancia = Instantiate(nuevoCuerpo, new Vector3(serpiente[i].transform.position.x - separacionEntreSecciones, this.transform.position.y, this.transform.position.z+1), this.transform.rotation);
             serpiente.Add(instancia);
             instancia.GetComponent<seccionSnake>().direccionSiguiente = codigoMovimiento.obtenerVectorDireccion();
+
+            instancia.GetComponent<SpriteRenderer>().color = GAMEMANAGER.COLORSERPIENTE;
         }
         
     }
@@ -47,6 +50,7 @@ public class tamanioSnake : MonoBehaviour {
 
         instancia.GetComponent<seccionSnake>().direccionSiguiente = serpiente[serpiente.Count - 1].GetComponent<seccionSnake>().direccionActual;
 
+        instancia.GetComponent<SpriteRenderer>().color = GAMEMANAGER.COLORSERPIENTE;
     }
 
 

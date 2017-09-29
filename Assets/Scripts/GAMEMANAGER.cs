@@ -8,7 +8,7 @@ public class GAMEMANAGER : MonoBehaviour
     public static GAMEMANAGER instancia;
 
     public static string DIFICULTAD;
-    public static string COLORSERPIENTE;
+    public static Color COLORSERPIENTE;
 
     public static string[] MEJORESNOMBRES;
     public static int[] MEJORESPUNTOS;
@@ -56,7 +56,7 @@ public class GAMEMANAGER : MonoBehaviour
     void inicializarValores() {
 
         DIFICULTAD = "NORMAL";
-        COLORSERPIENTE = "GREEN";
+        COLORSERPIENTE = Color.green;
 
         MEJORESNOMBRES = new string[10];
         MEJORESPUNTOS = new int[10];

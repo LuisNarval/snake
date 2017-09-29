@@ -143,6 +143,21 @@ public class ADMIN_JUEGO : MonoBehaviour {
 
 
 
+    public void irAColor() {
+        finDelJuego.GetComponent<Animator>().SetTrigger("irAColor");
+
+    }
+
+
+    public void salirDeColor() {
+        finDelJuego.GetComponent<Animator>().SetTrigger("salirDeColor");
+    }
+
+
+
+
+
+
 
 
 
