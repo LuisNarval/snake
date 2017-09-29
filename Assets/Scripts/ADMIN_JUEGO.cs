@@ -106,4 +106,9 @@ public class ADMIN_JUEGO : MonoBehaviour {
         StartCoroutine(conteoRegresivo(1.5f));
     }
 
+
+
+    public void regresarAlMenu() {
+        FADER.instancia.siguienteEscena("Menu");
+    }
 }

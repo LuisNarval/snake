@@ -14,9 +14,9 @@ public class ADMIN_MENU : MonoBehaviour {
 
     public void irAJuego()
     {
+        FADER.instancia.siguienteEscena("Juego");
     }
-
-
+    
     public void irADificultad()
     {
         animadorMenu.SetTrigger("irADificultad");
@@ -39,6 +39,7 @@ public class ADMIN_MENU : MonoBehaviour {
 
     public void salir()
     {
+        FADER.instancia.salirDelJuego();
     }
 
 
