@@ -34,6 +34,7 @@ public class auditorDePuntuacion : MonoBehaviour {
         }
 
 
+
         finDelJuego.SetActive(true);
 
         if (seRompioRecord)
@@ -49,25 +50,40 @@ public class auditorDePuntuacion : MonoBehaviour {
 
 
     
+
     public void asignarGanador() {
         string nombre= textoNombreGanador.text;
 
-        reacomodarPuntuaciones(posicionGanada);
+        reacomodarPuntuaciones(posicionGanada, nombre);
 
-        GAMEMANAGER.MEJORESNOMBRES[posicionGanada] = nombre;
-        GAMEMANAGER.MEJORESPUNTOS[posicionGanada] = puntos;
-
+        
         seRompioRecord = false;
+        textoNombreGanador.text = "Nombre . . .";
+
         finDelJuego.GetComponent<Animator>().SetTrigger("salirRecord");
+        
     }
 
 
 
-    void reacomodarPuntuaciones(int j) {
+
+    void reacomodarPuntuaciones(int j, string nuevoNombre) {
+
         for (int i=9; i > j ; i--) {
             GAMEMANAGER.MEJORESNOMBRES[i] = GAMEMANAGER.MEJORESNOMBRES[i - 1];
-            GAMEMANAGER.MEJORESPUNTOS[i] = GAMEMANAGER.MEJORESPUNTOS[i - 1];
+            GAMEMANAGER.MEJORESPUNTOS[i] = GAMEMANAGER.MEJORESPUNTOS[i - 1]; 
         }
+
+        GAMEMANAGER.MEJORESNOMBRES[j] = nuevoNombre;
+        GAMEMANAGER.MEJORESPUNTOS[j] = puntos;
+
+        for (int i = 0; i < 10; i++) {
+
+            PlayerPrefs.SetString(GAMEMANAGER.listaNombres[i], GAMEMANAGER.MEJORESNOMBRES[i]);
+            PlayerPrefs.SetInt(GAMEMANAGER.listaPuntos[i], GAMEMANAGER.MEJORESPUNTOS[i]);
+        }
+    
     }
+
 
 }
