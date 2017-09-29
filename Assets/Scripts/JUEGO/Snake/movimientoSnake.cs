@@ -39,20 +39,17 @@ public class movimientoSnake : MonoBehaviour {
     //Captura las teclas y modifica la dirección actual de movimiento
     void capturarTeclas()
     {
-        if (direccion != "ABAJO" && Input.GetKeyDown(KeyCode.W))
+        if (direccion != "ABAJO" && direccion != "ARRIBA" && (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)))
             direccion = "ARRIBA";
         
-        if (direccion != "DERECHA" && Input.GetKeyDown(KeyCode.A))
+        if (direccion != "DERECHA" && direccion != "IZQUIERDA" && (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)))
             direccion = "IZQUIERDA";
         
-        if (direccion != "ARRIBA" && Input.GetKeyDown(KeyCode.S))
+        if (direccion != "ARRIBA" && direccion != "ABAJO" && (Input.GetKeyDown(KeyCode.S) || Input. GetKeyDown(KeyCode.DownArrow)))
             direccion = "ABAJO";
            
-        if (direccion != "IZQUIERDA" && Input.GetKeyDown(KeyCode.D))
+        if (direccion != "IZQUIERDA" && direccion != "DERECHA" && (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)))
             direccion = "DERECHA";
-
-        if (Input.GetKeyDown(KeyCode.F))
-            codigoTamanio.agregarSeccion();
     }
 
 
