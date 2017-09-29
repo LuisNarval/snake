@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//Esta función captura el teclado y cambia la dirección de la cabeza y sus secciones con base en ello. También incluye el efecto de espejo.
 public class movimientoSnake : MonoBehaviour {
 
     public float velocidad = 8.0f;

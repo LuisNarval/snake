@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
+/*Este script es el Administrador de todo el juego, se encuentra presente en todas las escenas. Su función primordial es almacenar los arreglos que contienen la lista de los 10 mayores puntajes junto
+a sus respectivos nombres, y los vincula con un PlayerPref.*/
+
 public class GAMEMANAGER : MonoBehaviour
 {
 
@@ -26,6 +31,8 @@ public class GAMEMANAGER : MonoBehaviour
     }
 
 
+
+    //Esta funcion se encarga de que el Game Object que almacena a este script este presente en todas las escenas y no se repita.
     void hacerUnico()
     {
         if (instancia != null)
@@ -41,6 +48,8 @@ public class GAMEMANAGER : MonoBehaviour
 
 
 
+    /*Guarda los nombres de los PlayerPrefs que estaremos llamando en dos arreglos. Manda a llamar a la funcion que inicializa el resto de variables y a la funcion que verifica si es la primera vez
+    que se esta jugando.*/
     private void Start()
     {
         listaNombres = new string[] {"NOMBREUNO", "NOMBREDOS", "NOMBRETRES", "NOMBRECUATRO", "NOMBRECINCO", "NOMBRESEIS", "NOMBRESIETE", "NOMBREOCHO", "NOMBRENUEVE", "NOMBREDIEZ", };
@@ -52,7 +61,7 @@ public class GAMEMANAGER : MonoBehaviour
 
 
 
-
+    //Asigna un valor por default a la dificultad del juego y al color del personaje. Guarda todos los valores almacenas en los PlayerPref en dos arreglos para su posterior consulta.
     void inicializarValores() {
 
         DIFICULTAD = "NORMAL";
@@ -73,7 +82,7 @@ public class GAMEMANAGER : MonoBehaviour
 
 
 
-
+    //Si es la primera vez que se juega los PlayerPref estaran vacios. Esta funcion verifica si no existen valores para los PlayerPref y de ser así, les asigna unos valores predeterminados.
     void verificarSiEsPrimerJuego() {
 
         if (!PlayerPrefs.HasKey("SEHAJUGADOANTES"))

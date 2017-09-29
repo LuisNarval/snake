@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*Este script se encuentra dentro de cada uno de los prefabs correspondientes a las secciones de la serpiente. Su principal objetivo es seguir todos los movimientos que haga la cabeza 
+en un respectivo orden.*/
+
 public class seccionSnake : MonoBehaviour {
 
     public Vector3 direccionSiguiente;

@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Este script es el responsable de almacenar a la cabeza y todas sus secciones en una lista. 
+//Tiene dos objetivos principales. La primera es crear el cuerpo base para la serpiente consistente de una cabeza y dos secciones.  
+//La segunda es agregar una sección más a la serpiente, instanciando el GameObject y agregandolo a la lista.
+
 public class tamanioSnake : MonoBehaviour {
     
 
@@ -43,6 +47,7 @@ public class tamanioSnake : MonoBehaviour {
 
 
     //Agrega una nueva seccion a la serpiente y a la lista de GameObjects
+    //Esta función esta pensada para ejecutarse cada vez que colisionSnake.cs detecte una colisión de la serpiente con la manzana.
     public void agregarSeccion()
     {       
         GameObject instancia = Instantiate(nuevoCuerpo, serpiente[serpiente.Count - 1].GetComponent<Transform>().position, serpiente[serpiente.Count - 1].GetComponent<Transform>().rotation) as GameObject;

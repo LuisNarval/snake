@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
+/*Este script se encarga de realizar las transiciones entre escenas y ejecutar la animacion de una cortinilla para que la transición sea más amena. Este código estará presente en todas las escenas
+del juego.*/
 public class FADER : MonoBehaviour
 {
 
@@ -19,6 +21,7 @@ public class FADER : MonoBehaviour
     }
 
 
+    //Esta funcion se encarga de que el Game Object que almacena a este script este presente en todas las escenas y no se repita.
     void hacerUnico()
     {
         if (instancia != null)
@@ -33,6 +36,7 @@ public class FADER : MonoBehaviour
     }
 
 
+    //Esta corrutina se encarga de hacer la transicion de una escena a otra usando SceneManager.LoadScene y reproduciendo una animación de transición.
     private IEnumerator desvanecer(string escena)
     {
 
@@ -50,6 +54,8 @@ public class FADER : MonoBehaviour
 
     }
 
+
+    //Esta corrutina se encarga de cerrar el juego usando Application.Quit y reproduciendo una animación de transición.
     private IEnumerator apagarJuego()
     {
         cortina.SetActive(true);
@@ -61,13 +67,14 @@ public class FADER : MonoBehaviour
     }
 
     
-
+    //Esta funcion existe para que un botón externo pueda acceder a ella y ejecute la corrutina de siguiente escena.
     public void siguienteEscena(string escena)
     {
         StartCoroutine(desvanecer(escena));
     }
 
 
+    //Esta funcion existe para que un botón externo pueda acceder a ella y ejecute la corrutina de apagar el juego.
     public void salirDelJuego() {
         StartCoroutine(apagarJuego());
     }

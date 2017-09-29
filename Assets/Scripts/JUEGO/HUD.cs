@@ -3,23 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+//Este código se encarga de actualizar el HUD: Head Up Display. Su función principal es almacenar los puntos obtenidos por el jugador y actualizar el HUD con este valor. 
 public class HUD : MonoBehaviour {
     
     public int puntos;
     public Text texto_puntos;
-    
 
-	// Use this for initialization
-	void Start () {
+
+    //Inicializa variables
+    void Start () {
         puntos = 0;
         actualizarPuntos();
     }
 	
 
-	// Update is called once per frame
-	void Update () {}
+	
 
-
+    //Actualiza la información mostrada en la interfaz dependiendo de la cantidad de puntos.
     public void actualizarPuntos() {
         if (puntos < 10)
             texto_puntos.text = "000" + puntos.ToString();
@@ -35,6 +36,7 @@ public class HUD : MonoBehaviour {
     }
 
 
+    //Realiza un incremento a los puntos y manda a actualizar el HUD.
     public void incrementaPuntos() {
         puntos++;
         actualizarPuntos();

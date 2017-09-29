@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+/*Este script se encuentra dentro del Panel de Puntuaciones y su objetivo principal es llenar los campos del panel con los valores actuales de los PlayerPref que se encuentran almacenados en dos
+arreglos por el GAMEMANAGER*/
 public class tablaPuntuaciones : MonoBehaviour {
 
 
     public Text[] textoNombres;
     public Text[] textoPuntos;
 
+
+
+    /*Esta función es llamada por al administrador del menu y llena los campos de la tabla de puntuaciones con los valovalores actuales de los PlayerPref que se encuentran almacenados en dos
+    arreglos por el GAMEMANAGER*/
     public void colocarTabla() {
 
         for (int i = 0; i < 10; i++) {
@@ -24,6 +31,7 @@ public class tablaPuntuaciones : MonoBehaviour {
             else
                 textoPuntos[i].text = GAMEMANAGER.MEJORESPUNTOS[i].ToString();
         }
+
 
     }
 
