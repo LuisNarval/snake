@@ -73,6 +73,18 @@ public class ADMIN_JUEGO : MonoBehaviour {
     public void guardarRecord() {
         finDelJuego.GetComponent<Animator>().SetTrigger("salirRecord");
     }
+    
+    public void irAMenuDificultad() {
+        finDelJuego.GetComponent<Animator>().SetTrigger("irADificultad");
+    }
+
+    public void salirDeMenuDificultad() {
+        finDelJuego.GetComponent<Animator>().SetTrigger("salirDificultad");
+    }
+
+
+
+
 
 
     //Inicializa los puntos a cero, la manzana a su posicion original, destruye la serpiente actual junto a todas sus secciones, desvanece el submenu y comienza la corrutina de conteo regresivo
