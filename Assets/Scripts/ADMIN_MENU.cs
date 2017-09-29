@@ -1,16 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ADMIN_MENU : MonoBehaviour {
 
     public Animator animadorMenu;
+    public Text textoDificultad;
+   
+    public string dificultad {
+        get {
+            return GAMEMANAGER.DIFICULTAD;
+        }
 
-    // Use this for initialization
-    void Start () {}
-    
-    // Update is called once per frame
-    void Update () {}
+        set {
+            GAMEMANAGER.DIFICULTAD=value;
+        }
+    }
+
+
+    private void Start()
+    {
+        asignarDificultad(dificultad);
+    }
+
 
     public void irAJuego()
     {
@@ -43,4 +56,12 @@ public class ADMIN_MENU : MonoBehaviour {
     }
 
 
+
+    public void asignarDificultad(string valor){
+        dificultad = valor;
+        textoDificultad.text = dificultad;
+    }
+
+
+    
 }

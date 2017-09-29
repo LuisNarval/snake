@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class manzana : MonoBehaviour {
-    
+
+    public float rangoEnX = 18.0f;
+    public float rangoEnY = 10.0f;
+
+
     public void cambiarPosicion() {
 
-        float X = Random.Range(-18.0f,18.0f);
-        float Y = Random.Range(-10.0f, 10.0f);
+        float X = Random.Range(-rangoEnX,rangoEnX);
+        float Y = Random.Range(-rangoEnY, rangoEnY);
 
 
         int posicionX = (int)X;
